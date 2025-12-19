@@ -1,32 +1,61 @@
-export const initialStore=()=>{
-  return{
-    message: null,
-    todos: [
-      {
-        id: 1,
-        title: "Make the bed",
-        background: null,
-      },
-      {
-        id: 2,
-        title: "Do my homework",
-        background: null,
-      }
-    ]
-  }
-}
-
+// Reducer global de la aplicación
+// guía: decide cómo cambia el estado según cada acción
 export default function storeReducer(store, action = {}) {
-  switch(action.type){
-    case 'add_task':
+  switch (action.type) {
 
-      const { id,  color } = action.payload
-
+    // --- ESTADOS DE CARGA ---
+    case "SET_LOADING":
       return {
         ...store,
-        todos: store.todos.map((todo) => (todo.id === id ? { ...todo, background: color } : todo))
+        loading: true,
+        error: null
       };
+
+    case "SET_ERROR":
+      return {
+        ...store,
+        loading: false,
+        error: action.payload
+      };
+
+    // --- LECTURA DE CONTACTOS ---
+    case "GET_CONTACTS_SUCCESS":
+      return {
+        ...store,
+        loading: false,
+        contacts: action.payload
+      };
+
+    // --- CREAR CONTACTO ---
+    case "ADD_CONTACT_SUCCESS":
+      return {
+        ...store,
+        loading: false,
+        contacts: [...store.contacts, action.payload]
+      };
+
+    // --- ACTUALIZAR CONTACTO ---
+    case "UPDATE_CONTACT_SUCCESS":
+      return {
+        ...store,
+        loading: false,
+        contacts: store.contacts.map(contact =>
+          contact.id === action.payload.id ? action.payload : contact
+        )
+      };
+
+    // --- ELIMINAR CONTACTO ---
+    case "DELETE_CONTACT_SUCCESS":
+      return {
+        ...store,
+        loading: false,
+        contacts: store.contacts.filter(
+          contact => contact.id !== action.payload
+        )
+      };
+
     default:
-      throw Error('Unknown action.');
-  }    
+      // guía: si no reconoce la acción, devuelve el estado actual
+      return store;
+  }
 }
