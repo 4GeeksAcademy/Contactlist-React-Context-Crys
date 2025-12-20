@@ -4,7 +4,7 @@ import ScrollToTop from "../components/ScrollToTop";
 import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
 import useGlobalReducer from "../hooks/useGlobalReducer";
-import { getContacts } from "../services/contacts";
+import { getContacts } from "../service/contacts";
 
 // Layout = punto de arranque global de la app
 export const Layout = () => {
