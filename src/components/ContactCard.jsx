@@ -3,7 +3,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { Modal, Button } from "react-bootstrap"; // Modal y Button para warning
-import  useGlobalReducer from "../hooks/useGlobalReducer";
+import useGlobalReducer from "../hooks/useGlobalReducer";
 import { deleteContact } from "../service/contacts"; // función de servicio API
 
 export const ContactCard = ({ contact }) => {
@@ -28,7 +28,7 @@ export const ContactCard = ({ contact }) => {
         <>
             {/* Caja principal de cada contacto */}
             <div className="contact-card card d-flex flex-row p-3 mb-3 shadow-sm align-items-center">
-                
+
                 {/* --- Foto a la izquierda --- */}
                 <div className="contact-img me-3">
                     <img
@@ -65,7 +65,9 @@ export const ContactCard = ({ contact }) => {
 
                 {/* --- Botones a la derecha (editar y eliminar) --- */}
                 <div className="contact-actions d-flex flex-column ms-3">
-                    <button className="btn btn-sm btn-warning mb-2" title="Editar">
+                    <button className="btn btn-sm btn-warning mb-2" title="Editar" 
+                    onClick={() => navigate(`/contacts/edit/${contact.id}`)}
+                    >
                         <i className="bi bi-pencil-fill"></i>
                     </button>
                     <button

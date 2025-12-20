@@ -9,6 +9,7 @@ import { Layout } from "./pages/Layout";
 import { Home } from "./pages/Home";
 import { Contacts } from "./pages/Contacts";
 import { AddContact } from "./pages/AddContact";
+import { EditContact } from "./pages/EditContact";
 import { Single } from "./pages/Single";
 import { Demo } from "./pages/Demo";
 
@@ -23,6 +24,9 @@ export const router = createBrowserRouter(
             <Route path="contacts" element={<Contacts />} />
             {/* ADDCONTACTS */}
             <Route path="contacts/add" element={<AddContact />} />
+            {/* EDITCONTACTS */}
+            <Route path="contacts/edit/:theId" element={<EditContact />} />
+
 
             {/* SINGLE */}
             <Route path="single/:theId" element={<Single />} />
