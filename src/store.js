@@ -1,9 +1,14 @@
-// Reducer global de la aplicación
-// guía: decide cómo cambia el estado según cada acción
-export default function storeReducer(store, action = {}) {
+// Estado inicial global de la app
+export const initialStore = {
+  contacts: [],
+  loading: false,
+  error: null
+};
+
+// Reducer global
+export const storeReducer = (store, action = {}) => {
   switch (action.type) {
 
-    // --- ESTADOS DE CARGA ---
     case "SET_LOADING":
       return {
         ...store,
@@ -18,7 +23,6 @@ export default function storeReducer(store, action = {}) {
         error: action.payload
       };
 
-    // --- LECTURA DE CONTACTOS ---
     case "GET_CONTACTS_SUCCESS":
       return {
         ...store,
@@ -26,7 +30,6 @@ export default function storeReducer(store, action = {}) {
         contacts: action.payload
       };
 
-    // --- CREAR CONTACTO ---
     case "ADD_CONTACT_SUCCESS":
       return {
         ...store,
@@ -34,7 +37,6 @@ export default function storeReducer(store, action = {}) {
         contacts: [...store.contacts, action.payload]
       };
 
-    // --- ACTUALIZAR CONTACTO ---
     case "UPDATE_CONTACT_SUCCESS":
       return {
         ...store,
@@ -44,7 +46,6 @@ export default function storeReducer(store, action = {}) {
         )
       };
 
-    // --- ELIMINAR CONTACTO ---
     case "DELETE_CONTACT_SUCCESS":
       return {
         ...store,
@@ -55,7 +56,6 @@ export default function storeReducer(store, action = {}) {
       };
 
     default:
-      // guía: si no reconoce la acción, devuelve el estado actual
       return store;
   }
-}
+};

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { Modal, Button } from "react-bootstrap"; // Modal y Button para warning
-import { useGlobalReducer } from "../hooks/useGlobalReducer";
+import  useGlobalReducer from "../hooks/useGlobalReducer";
 import { deleteContact } from "../service/contacts"; // función de servicio API
 
 export const ContactCard = ({ contact }) => {

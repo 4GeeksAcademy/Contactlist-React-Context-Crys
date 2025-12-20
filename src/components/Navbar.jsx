@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useGlobalReducer } from "../hooks/useGlobalReducer"; // si luego manejamos modal o acciones
+import  useGlobalReducer  from "../hooks/useGlobalReducer"; // si luego manejamos modal o acciones
 
 export const Navbar = () => {
     const { dispatch } = useGlobalReducer(); // opcional si quieres usarlo para abrir modal
