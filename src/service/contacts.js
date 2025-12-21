@@ -5,18 +5,18 @@ const AGENDA = "crys_contact_manager";
 const DEFAULT_CONTACTS = [
   {
     id: 1,
-    name: "Vegeta",
-    email: "vegeta@dbz.com",
-    phone: "+34 600 111 111",
-    address: "Planeta Vegeta",
+    name: "Vegeta IV, Príncipe de los Saiyajin",
+    email: "vegeta.prince@capsulecorp.earth",
+    phone: "+34 666 777 000",
+    address: "Tierra – normalmente en Capsule Corporation, Ciudad del Oeste",
     avatar: "/img/vegeta.png"
   },
   {
     id: 2,
-    name: "Homero Simpson",
-    email: "homero@simpsons.com",
+    name: "Homer Jay Simpson",
+    email: "homer.simpson@springfieldmail.com",
     phone: "+34 600 222 222",
-    address: "Springfield",
+    address: "742 Evergreen Terrace, Springfield",
     avatar: "/img/homero.png"
   }
 ];
