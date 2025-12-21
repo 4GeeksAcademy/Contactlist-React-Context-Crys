@@ -1,42 +1,57 @@
+// pages/Layout.jsx
 import { useEffect } from "react";
-import { Outlet } from "react-router-dom/dist";
+import { Outlet } from "react-router-dom";
 import ScrollToTop from "../components/ScrollToTop";
 import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
 import useGlobalReducer from "../hooks/useGlobalReducer";
-import { getContacts } from "../service/contacts";
+import {
+  getContacts,
+  createAgendaIfNotExists
+} from "../service/contacts";
 
-// Layout = punto de arranque global de la app
+// Layout = shell global de la app
+// aquí vive la inicialización real de la aplicación
 export const Layout = () => {
-    const { dispatch } = useGlobalReducer();
+  const { dispatch } = useGlobalReducer();
 
-    useEffect(() => {
-        // 1️⃣ Activamos estado de carga global
+  useEffect(() => {
+    const initApp = async () => {
+      try {
+        // 1️⃣ Estado global de carga
         dispatch({ type: "SET_LOADING" });
 
-        // 2️⃣ Pedimos los contactos a la API
-        getContacts()
-            .then((contacts) => {
-                // 3️⃣ Guardamos contactos en el store
-                dispatch({
-                    type: "GET_CONTACTS_SUCCESS",
-                    payload: contacts
-                });
-            })
-            .catch((error) => {
-                // 4️⃣ Centralizamos el error
-                dispatch({
-                    type: "SET_ERROR",
-                    payload: error.message || "Error loading contacts"
-                });
-            });
-    }, []);
+        // 2️⃣ Crear agenda (usuario) si no existe
+        await createAgendaIfNotExists();
 
-    return (
-        <ScrollToTop>
-            <Navbar />
-            <Outlet />
-            <Footer />
-        </ScrollToTop>
-    );
+        // 3️⃣ Obtener contactos desde la API
+        const contacts = await getContacts();
+
+        // 4️⃣ Guardar contactos en el store
+        dispatch({
+          type: "GET_CONTACTS_SUCCESS",
+          payload: contacts
+        });
+
+      } catch (error) {
+        // 5️⃣ Centralizar errores
+        dispatch({
+          type: "SET_ERROR",
+          payload: error.message || "Error inicializando la aplicación"
+        });
+      }
+    };
+
+    initApp();
+  }, [dispatch]);
+
+  return (
+    <ScrollToTop>
+      <Navbar />
+      <main className="app-content">
+        <Outlet />
+      </main>
+      <Footer />
+    </ScrollToTop>
+  );
 };

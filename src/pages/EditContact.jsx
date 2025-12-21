@@ -24,7 +24,11 @@ export const EditContact = () => {
 
   // 2️⃣ Cargar datos del contacto
   useEffect(() => {
-    const contact = contacts.find(c => c.id === parseInt(theId));
+  
+const contact = contacts.find(
+  c => String(c.id) === String(theId)
+);
+
 
     if (contact) {
       setFormData({

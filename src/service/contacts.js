@@ -1,42 +1,78 @@
 // services/contacts.js
-// guía: centraliza todas las llamadas a la API de contactos
 
-const BASE_URL = "https://playground.4geeks.com/contact"; // base API
+const BASE_URL = "https://playground.4geeks.com/contact";
+const AGENDA = "crys_contact_manager";
 
-// --- GET ALL CONTACTS ---
+// ----------------------------
+// Crear agenda si no existe
+// ----------------------------
+export const createAgendaIfNotExists = async () => {
+  const response = await fetch(`${BASE_URL}/agendas/${AGENDA}`, {
+    method: "POST"
+  });
+
+  // 400 = ya existe → OK
+  if (!response.ok && response.status !== 400) {
+    throw new Error("No se pudo crear la agenda");
+  }
+};
+
+// ----------------------------
+// Obtener contactos
+// ----------------------------
 export const getContacts = async () => {
-  const response = await fetch(`${BASE_URL}/contact`);
+  const response = await fetch(
+    `${BASE_URL}/agendas/${AGENDA}/contacts`
+  );
+
   if (!response.ok) throw new Error("Error al obtener contactos");
   return await response.json();
 };
 
-// --- CREATE CONTACT ---
+// ----------------------------
+// Crear contacto
+// ----------------------------
 export const createContact = async (contact) => {
-  const response = await fetch(`${BASE_URL}/contact`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(contact)
-  });
+  const response = await fetch(
+    `${BASE_URL}/agendas/${AGENDA}/contacts`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(contact)
+    }
+  );
+
   if (!response.ok) throw new Error("Error al crear contacto");
   return await response.json();
 };
 
-// --- UPDATE CONTACT ---
+// ----------------------------
+// Actualizar contacto
+// ----------------------------
 export const updateContact = async (id, contact) => {
-  const response = await fetch(`${BASE_URL}/contact/${id}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(contact)
-  });
+  const response = await fetch(
+    `${BASE_URL}/agendas/${AGENDA}/contacts/${id}`,
+    {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(contact)
+    }
+  );
+
   if (!response.ok) throw new Error("Error al actualizar contacto");
   return await response.json();
 };
 
-// --- DELETE CONTACT ---
+// ----------------------------
+// Eliminar contacto
+// ----------------------------
 export const deleteContact = async (id) => {
-  const response = await fetch(`${BASE_URL}/contact/${id}`, {
-    method: "DELETE"
-  });
+  const response = await fetch(
+    `${BASE_URL}/agendas/${AGENDA}/contacts/${id}`,
+    {
+      method: "DELETE"
+    }
+  );
+
   if (!response.ok) throw new Error("Error al eliminar contacto");
-  return await response.json();
 };

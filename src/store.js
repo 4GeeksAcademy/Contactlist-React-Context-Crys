@@ -31,11 +31,13 @@ export const storeReducer = (store, action = {}) => {
       };
 
     case "ADD_CONTACT_SUCCESS":
-      return {
-        ...store,
-        loading: false,
-        contacts: [...store.contacts, action.payload]
-      };
+  return {
+    ...store,
+    loading: false,
+    contacts: Array.isArray(store.contacts)
+      ? [...store.contacts, action.payload]
+      : [action.payload]
+  };
 
     case "UPDATE_CONTACT_SUCCESS":
       return {
