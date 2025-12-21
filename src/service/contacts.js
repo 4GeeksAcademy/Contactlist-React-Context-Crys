@@ -9,7 +9,7 @@ const DEFAULT_CONTACTS = [
     email: "vegeta.prince@capsulecorp.earth",
     phone: "+34 666 777 000",
     address: "Tierra – normalmente en Capsule Corporation, Ciudad del Oeste",
-    avatar: "/img/vegeta.png"
+    image: "vegeta.png"
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ const DEFAULT_CONTACTS = [
     email: "homer.simpson@springfieldmail.com",
     phone: "+34 600 222 222",
     address: "742 Evergreen Terrace, Springfield",
-    avatar: "/img/homero.png"
+    image: "homero.png"
   }
 ];
 
@@ -88,7 +88,7 @@ export const updateContact = async (id, contact) => {
     const updated = current.map(c => (String(c.id) === String(id) ? { ...c, ...contact } : c));
     localStorage.setItem("contacts", JSON.stringify(updated));
 
-    // Intentamos API, pero fallar no bloquea
+    // Intentamos API, pero fallo no bloquea
     try {
       await fetch(`${BASE_URL}/agendas/${AGENDA}/contacts/${id}`, {
         method: "PUT",
@@ -96,7 +96,7 @@ export const updateContact = async (id, contact) => {
         body: JSON.stringify(contact)
       });
     } catch {}
-    
+
     return updated.find(c => String(c.id) === String(id));
   } catch (error) {
     throw new Error(error.message);

@@ -32,8 +32,8 @@ export const ContactCard = ({ contact }) => {
         if (!contact || !contact.name) return defaultImg;
         const name = contact.name.toLowerCase();
         if (name.includes("vegeta")) return vegetaImg;
-        if (name.includes("homero")) return homeroImg;
-        return contact.image || defaultImg;
+        if (name.includes("homer") || name.includes("homero")) return homeroImg;
+        return contact.image ? require(`../assets/${contact.image}`) : defaultImg;
     };
 
     return (
