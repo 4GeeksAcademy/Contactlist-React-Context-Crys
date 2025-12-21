@@ -1,5 +1,3 @@
-// services/contacts.js
-
 const BASE_URL = "https://playground.4geeks.com/contact";
 const AGENDA = "crys_contact_manager";
 
@@ -11,7 +9,7 @@ const DEFAULT_CONTACTS = [
     email: "vegeta@dbz.com",
     phone: "+34 600 111 111",
     address: "Planeta Vegeta",
-    avatar: "/img/vegeta.jpg"
+    avatar: "/img/vegeta.png"
   },
   {
     id: 2,
@@ -19,7 +17,7 @@ const DEFAULT_CONTACTS = [
     email: "homero@simpsons.com",
     phone: "+34 600 222 222",
     address: "Springfield",
-    avatar: "/img/homero.jpg"
+    avatar: "/img/homero.png"
   }
 ];
 
@@ -28,15 +26,10 @@ const DEFAULT_CONTACTS = [
 // ----------------------------
 export const createAgendaIfNotExists = async () => {
   try {
-    const response = await fetch(`${BASE_URL}/agendas/${AGENDA}`, {
-      method: "POST"
-    });
-    // 400 = ya existe → OK
-    if (!response.ok && response.status !== 400) {
-      throw new Error("No se pudo crear la agenda");
-    }
+    const response = await fetch(`${BASE_URL}/agendas/${AGENDA}`, { method: "POST" });
+    if (!response.ok && response.status !== 400) throw new Error("No se pudo crear la agenda");
 
-    // Si no hay contactos en localStorage, guardamos los default
+    // Guardamos los default en localStorage si no existen
     if (!localStorage.getItem("contacts")) {
       localStorage.setItem("contacts", JSON.stringify(DEFAULT_CONTACTS));
     }
@@ -50,16 +43,13 @@ export const createAgendaIfNotExists = async () => {
 // ----------------------------
 export const getContacts = async () => {
   try {
-    // Intentamos primero desde localStorage
     const stored = localStorage.getItem("contacts");
     if (stored) return JSON.parse(stored);
 
-    // Si no hay nada, pedimos a la API
     const response = await fetch(`${BASE_URL}/agendas/${AGENDA}/contacts`);
     if (!response.ok) throw new Error("Error al obtener contactos");
-    const data = await response.json();
 
-    // Guardamos en localStorage
+    const data = await response.json();
     localStorage.setItem("contacts", JSON.stringify(data));
     return data;
   } catch (error) {
@@ -80,13 +70,8 @@ export const createContact = async (contact) => {
     if (!response.ok) throw new Error("Error al crear contacto");
 
     const data = await response.json();
-
-    // Guardamos en localStorage
     const current = JSON.parse(localStorage.getItem("contacts")) || [];
-    localStorage.setItem(
-      "contacts",
-      JSON.stringify([...current, data])
-    );
+    localStorage.setItem("contacts", JSON.stringify([...current, data]));
 
     return data;
   } catch (error) {
@@ -99,21 +84,20 @@ export const createContact = async (contact) => {
 // ----------------------------
 export const updateContact = async (id, contact) => {
   try {
-    const response = await fetch(`${BASE_URL}/agendas/${AGENDA}/contacts/${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(contact)
-    });
-    if (!response.ok) throw new Error("Error al actualizar contacto");
-
-    const data = await response.json();
-
-    // Actualizamos localStorage
     const current = JSON.parse(localStorage.getItem("contacts")) || [];
-    const updated = current.map(c => (String(c.id) === String(id) ? data : c));
+    const updated = current.map(c => (String(c.id) === String(id) ? { ...c, ...contact } : c));
     localStorage.setItem("contacts", JSON.stringify(updated));
 
-    return data;
+    // Intentamos API, pero fallar no bloquea
+    try {
+      await fetch(`${BASE_URL}/agendas/${AGENDA}/contacts/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(contact)
+      });
+    } catch {}
+    
+    return updated.find(c => String(c.id) === String(id));
   } catch (error) {
     throw new Error(error.message);
   }
@@ -124,15 +108,14 @@ export const updateContact = async (id, contact) => {
 // ----------------------------
 export const deleteContact = async (id) => {
   try {
-    const response = await fetch(`${BASE_URL}/agendas/${AGENDA}/contacts/${id}`, {
-      method: "DELETE"
-    });
-    if (!response.ok) throw new Error("Error al eliminar contacto");
-
-    // Actualizamos localStorage
     const current = JSON.parse(localStorage.getItem("contacts")) || [];
     const filtered = current.filter(c => String(c.id) !== String(id));
     localStorage.setItem("contacts", JSON.stringify(filtered));
+
+    // Intentamos API, pero fallo no bloquea
+    try {
+      await fetch(`${BASE_URL}/agendas/${AGENDA}/contacts/${id}`, { method: "DELETE" });
+    } catch {}
 
   } catch (error) {
     throw new Error(error.message);
