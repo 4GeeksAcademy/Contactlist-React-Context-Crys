@@ -65,7 +65,7 @@ body {
 }
 
 /* =====================================================
-   BORDE LUMINOSO ÚNICO (RECORRE TODO)
+   BORDE LUMINOSO ÚNICO
    ===================================================== */
 
 .navbar-app::before {
@@ -110,7 +110,7 @@ body {
 }
 
 /* =====================================================
-   LOGO + TÍTULO
+   LOGO + TÍTULO NAVBAR
    ===================================================== */
 
 .navbar-title {
@@ -149,7 +149,7 @@ body {
 }
 
 /* =====================================================
-   BOTÓN AGREGAR CONTACTO (FIX DEFINITIVO)
+   BOTÓN AGREGAR CONTACTO
    ===================================================== */
 
 .btn-add-contact {
@@ -174,7 +174,6 @@ body {
     transition: var(--transition-smooth);
 }
 
-/* CAPA ROJA (DEBAJO) */
 .btn-add-contact::before {
     content: "";
     position: absolute;
@@ -185,17 +184,15 @@ body {
     z-index: 0;
 }
 
-/* TEXTO E ICONO SIEMPRE ARRIBA */
 .btn-add-contact i,
 .btn-add-contact .btn-text {
     position: relative;
     z-index: 1;
 }
 
-/* CONTRASTE FUERTE AL RELLENARSE */
 .btn-add-contact:hover {
     color: var(--text-on-red);
-    text-shadow: 0 2px 6px rgba(0,0,0,0.45); /* 🔴 CLAVE */
+    text-shadow: 0 2px 6px rgba(0,0,0,0.45);
     box-shadow: 0 0 40px rgba(255, 46, 46, 0.9);
     transform: translateY(-3px);
 }
@@ -205,7 +202,7 @@ body {
 }
 
 /* =====================================================
-   RESPONSIVE REAL (SOLO ICONO)
+   RESPONSIVE NAVBAR
    ===================================================== */
 
 @media (max-width: 576px) {
@@ -224,10 +221,9 @@ body {
     }
 
     .btn-add-contact .btn-text {
-        display: none; /* 🔴 AHORA SÍ FUNCIONA */
+        display: none;
     }
 }
-
 /* =========================
    HOME – WRAPPER
 ========================= */
@@ -247,14 +243,14 @@ body {
 }
 
 /* =========================
-   CARD PRINCIPAL (GLASS + NEON)
+   CARD PRINCIPAL
 ========================= */
 
 .home-card {
     position: relative;
     display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 2.5rem;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 0.5rem;
     align-items: center;
     padding: 2.5rem;
     border-radius: 28px;
@@ -266,23 +262,29 @@ body {
         0 0 0 1px rgba(255, 255, 255, 0.08),
         0 30px 90px rgba(0, 0, 0, 0.65);
 
-    color: #fff;
-    font-family: 'Space Grotesk', system-ui, sans-serif;
-
     transition: transform 0.4s ease;
-    isolation: isolate; /* clave para glow */
-    cursor: pointer; /* interacción clic/touch en cualquier parte */
+    isolation: isolate;
+}
+
+.home-card:hover {
+    transform: translateY(-6px);
 }
 
 /* =========================
-   NEON + GLOW
+   NEON CARD (NO BLOQUEA CLICK)
 ========================= */
 
-.home-card::before {
+.home-card::before,
+.home-card::after {
     content: "";
     position: absolute;
-    inset: -2px;
+    inset: 0;
     border-radius: inherit;
+    pointer-events: none; /* FIX CLAVE */
+}
+
+.home-card::before {
+    inset: -2px;
     background: linear-gradient(
         120deg,
         transparent,
@@ -290,52 +292,30 @@ body {
         rgba(124, 58, 237, 0.55),
         transparent
     );
-    opacity: 0.35;
+    opacity: 0.45;
     filter: blur(18px);
     z-index: -1;
-    transition: opacity 0.4s ease;
     animation: neonBreath 6s ease-in-out infinite;
 }
 
 .home-card::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
     border: 1px solid rgba(168, 85, 247, 0.18);
-    pointer-events: none;
 }
 
 @keyframes neonBreath {
     0%,100% { opacity: 0.35; }
-    50% { opacity: 0.5; }
+    50% { opacity: 0.6; }
 }
 
 /* =========================
-   HOVER / CLICK INTERACTIVO
-========================= */
-
-.home-card:hover,
-.home-card:focus-within,
-.home-card:active {
-    transform: translateY(-6px);
-}
-
-.home-card:hover::before,
-.home-card:focus-within::before,
-.home-card:active::before {
-    opacity: 0.7;
-}
-
-/* =========================
-   VISUAL (IMÁGENES) CON SALTO
+   IMÁGENES
 ========================= */
 
 .home-visual {
     position: relative;
-    width: 100%;
     max-width: 300px;
     aspect-ratio: 1 / 1;
+    margin-left: 50px;
 }
 
 .home-img {
@@ -346,11 +326,12 @@ body {
     object-fit: contain;
     transition: all 0.5s ease;
     filter: drop-shadow(0 0 18px rgba(180, 0, 255, 0.55));
+    margin-left: 40px;
+}
 }
 
 .home-img--idle {
     opacity: 1;
-    transform: translateY(0) scale(1);
 }
 
 .home-img--active {
@@ -358,17 +339,11 @@ body {
     transform: translateY(20px) scale(0.92);
 }
 
-/* Activación al hover, focus o click en toda la card */
-.home-card:hover .home-img--idle,
-.home-card:focus-within .home-img--idle,
-.home-card:active .home-img--idle {
+.home-card:hover .home-img--idle {
     opacity: 0;
-    transform: translateY(18px) scale(0.9);
 }
 
-.home-card:hover .home-img--active,
-.home-card:focus-within .home-img--active,
-.home-card:active .home-img--active {
+.home-card:hover .home-img--active {
     opacity: 1;
     transform: translateY(0) scale(1);
 }
@@ -384,14 +359,24 @@ body {
 }
 
 .home-title {
-    font-size: clamp(2rem, 4vw, 2.6rem);
-    font-weight: 700;
-    margin-bottom: 0.5rem;
+    font-size: clamp(2.4rem, 5vw, 3.2rem);
+    font-weight: 800;
+    margin-bottom: 0.4rem;
+
+    color: #ffffff;
+    text-shadow:
+        0 0 6px rgba(168, 85, 247, 0.6),
+        0 0 16px rgba(124, 58, 237, 0.5);
+}
+
+.home-card:hover .home-title {
+    text-shadow:
+        0 0 12px rgba(168, 85, 247, 0.9),
+        0 0 26px rgba(124, 58, 237, 0.8);
 }
 
 .home-subtitle {
     color: rgba(255, 255, 255, 0.75);
-    margin-bottom: 1.2rem;
 }
 
 .home-summary {
@@ -399,39 +384,37 @@ body {
 }
 
 /* =========================
-   BOTONES CON ICONOS
+   BOTONES HOME (FUNCIONALES)
 ========================= */
 
 .home-actions {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
-    justify-content: flex-start;
 }
 
 .home-btn {
+    pointer-events: auto;
+    z-index: 2;
+
     display: inline-flex;
     align-items: center;
     gap: 0.6rem;
+
     padding: 0.65rem 1.4rem;
     border-radius: 999px;
+
     font-weight: 600;
     text-decoration: none;
+
     transition: all 0.3s ease;
-    white-space: nowrap;
 }
 
-.home-btn i {
-    font-size: 1.2rem;
-}
-
-/* Botón ver contactos */
 .home-btn--view {
     background: linear-gradient(135deg, #7c3aed, #a855f7);
-    color: #fff;
+    color: #ffffff;
 }
 
-/* Botón agregar contacto */
 .home-btn--add {
     background: linear-gradient(135deg, #22c55e, #4ade80);
     color: #052e1a;
@@ -443,14 +426,7 @@ body {
 }
 
 /* =========================
-   ESTADOS
-========================= */
-
-.home-loading { color: #c084fc; }
-.home-error { color: #ff4d6d; }
-
-/* =========================
-   RESPONSIVE
+   RESPONSIVE HOME
 ========================= */
 
 @media (max-width: 768px) {
@@ -458,9 +434,11 @@ body {
         grid-template-columns: 1fr;
         text-align: center;
     }
+
     .home-visual {
         margin: 0 auto;
     }
+
     .home-actions {
         justify-content: center;
     }
@@ -468,9 +446,338 @@ body {
 
 @media (max-width: 480px) {
     .home-btn span {
-        display: none; /* solo icono en móvil */
+        display: none;
     }
+
     .home-btn {
         padding: 0.65rem;
+    }
+}
+/* =========================
+   ADD CONTACT – CONTENEDOR GENERAL
+========================= */
+
+.add-contact-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem 2rem;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+
+    background: rgba(30, 15, 55, 0.25);
+    backdrop-filter: blur(14px);
+
+    border-radius: 24px;
+    box-shadow:
+        0 0 0 1px rgba(168, 85, 247, 0.18),
+        0 20px 60px rgba(0, 0, 0, 0.5);
+
+    position: relative;
+    isolation: isolate;
+}
+
+.add-contact-container::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(168, 85, 247, 0.35),
+        rgba(124, 58, 237, 0.45),
+        transparent
+    );
+
+    filter: blur(16px);
+    opacity: 0.4;
+    z-index: -1;
+    animation: addGlowBreath 6s ease-in-out infinite;
+}
+
+@keyframes addGlowBreath {
+    0%,100% { opacity: 0.35; }
+    50% { opacity: 0.55; }
+}
+
+/* =========================
+   TÍTULO
+========================= */
+
+.add-contact-title {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 800;
+    text-align: center;
+
+    color: #e0dfff;
+    letter-spacing: 0.5px;
+    margin-bottom: 1.8rem;
+
+    text-shadow: 0 0 8px rgba(168, 85, 247, 0.6);
+}
+
+/* =========================
+   FORMULARIO
+========================= */
+
+.add-contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* =========================
+   LABELS
+========================= */
+
+.add-contact-form .form-label {
+    font-weight: 600;
+    color: #e0dfff;
+    margin-bottom: 0.35rem;
+}
+
+/* =========================
+   INPUTS
+========================= */
+
+.add-contact-input {
+    background: rgba(123, 11, 234, 0.4);
+    color: #3730ff;
+
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    border-radius: 14px;
+
+    padding: 0.55rem 0.85rem;
+    max-width: 400px; /* para que no se extienda full width */
+    width: 100%; 
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.add-contact-input::placeholder {
+    color: rgba(224, 223, 255, 0.5);
+}
+
+.add-contact-input:focus {
+    outline: none;
+    border-color: #9b5cff;
+    box-shadow:
+        0 0 0 1px rgba(155, 92, 255, 0.5),
+        0 0 12px rgba(155, 92, 255, 0.35);
+    background: rgba(50, 30, 70, 0.55);
+}
+
+/* =========================
+   ACCIONES
+========================= */
+
+.add-contact-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+/* BOTÓN GUARDAR */
+.add-contact-actions .btn-primary {
+    background: linear-gradient(135deg, #22c55e, #4ade80);
+    color: #052e1a;
+    font-weight: 700;
+    border: none;
+    border-radius: 999px;
+    padding: 0.55rem .5rem;
+    box-shadow: 0 0 18px rgba(34, 197, 94, 0.5);
+    transition: all 0.3s ease;
+}
+
+.add-contact-actions .btn-primary:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.15);
+    box-shadow: 0 0 28px rgba(34, 197, 94, 0.75);
+}
+
+/* BOTÓN CANCELAR */
+.add-contact-actions .btn-secondary {
+    background: rgba(255, 255, 255, 0.12);
+    color: #e0dfff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 999px;
+    padding: 0.55rem 1.4rem;
+    transition: all 0.3s ease;
+}
+
+.add-contact-actions .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 576px) {
+    .add-contact-container {
+        padding: 2rem 1.4rem;
+    }
+
+    .add-contact-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .add-contact-actions button {
+        width: 100%;
+    }
+}
+
+
+/* =====================================================
+   TÍTULO
+   ===================================================== */
+
+.add-contact-title {
+    font-size: clamp(2.2rem, 4vw, 2.8rem);
+    font-weight: 800;
+    text-align: center;
+
+    color: #ffffff;
+    letter-spacing: 0.5px;
+
+    margin-bottom: 2rem;
+
+    text-shadow:
+        0 0 8px rgba(168, 85, 247, 0.7),
+        0 0 18px rgba(124, 58, 237, 0.45);
+}
+
+/* =====================================================
+   FORMULARIO
+   ===================================================== */
+
+.add-contact-form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* =====================================================
+   LABELS
+   ===================================================== */
+
+.add-contact-form .form-label {
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 0.35rem;
+}
+
+/* =====================================================
+   INPUTS
+   ===================================================== */
+
+.add-contact-input {
+    background: rgba(0, 0, 0, 0.35);
+    color: #ffffff;
+
+    border: 1px solid rgba(168, 85, 247, 0.35);
+    border-radius: 14px;
+
+    padding: 0.65rem 0.85rem;
+
+    transition: all 0.3s ease;
+}
+
+.add-contact-input::placeholder {
+    color: rgba(255, 255, 255, 0.45);
+}
+
+.add-contact-input:focus {
+    outline: none;
+    border-color: #9b5cff;
+
+    box-shadow:
+        0 0 0 1px rgba(155, 92, 255, 0.6),
+        0 0 18px rgba(155, 92, 255, 0.55);
+
+    background: rgba(0, 0, 0, 0.45);
+}
+
+/* =====================================================
+   ACCIONES
+   ===================================================== */
+
+.add-contact-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+/* =====================================================
+   BOTÓN GUARDAR
+   ===================================================== */
+
+.add-contact-actions .btn-primary {
+    background: linear-gradient(135deg, #22c55e, #4ade80);
+    color: #052e1a;
+
+    font-weight: 700;
+    border: none;
+    border-radius: 999px;
+
+    padding: 0.6rem 1.6rem;
+
+    box-shadow: 0 0 18px rgba(34, 197, 94, 0.6);
+    transition: all 0.3s ease;
+}
+
+.add-contact-actions .btn-primary:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.15);
+    box-shadow: 0 0 28px rgba(34, 197, 94, 0.85);
+}
+
+/* =====================================================
+   BOTÓN CANCELAR
+   ===================================================== */
+
+.add-contact-actions .btn-secondary {
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 999px;
+
+    padding: 0.6rem 1.4rem;
+
+    transition: all 0.3s ease;
+}
+
+.add-contact-actions .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 576px) {
+
+    .add-contact-container {
+        padding: 2.2rem 1.4rem;
+    }
+
+    .add-contact-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .add-contact-actions button {
+        width: 100%;
     }
 }

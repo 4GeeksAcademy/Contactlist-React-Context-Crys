@@ -12,8 +12,8 @@ export const Home = () => {
         <section className="home-wrapper">
             <div className="home-card container">
 
-                {/* Imagen */}
-                <div className="home-visual" tabIndex="0">
+                {/* Imagen decorativa (no bloquea clicks) */}
+                <div className="home-visual">
                     <img
                         src={homeImg}
                         alt="Personaje sentado"
@@ -26,7 +26,7 @@ export const Home = () => {
                     />
                 </div>
 
-                {/* Texto */}
+                {/* Contenido funcional */}
                 <div className="home-content">
                     <h1 className="home-title">Contact Manager</h1>
 
