@@ -1,0 +1,476 @@
+/* =====================================================
+   VARIABLES DE DISEÑO
+   ===================================================== */
+
+:root {
+    --bg-base-1: #0b0616;
+    --bg-base-2: #120a24;
+
+    --nav-purple-1: #3b1c5a;
+    --nav-purple-2: #1b0f2e;
+
+    --accent-purple: #9b5cff;
+    --accent-purple-soft: rgba(155, 92, 255, 0.45);
+
+    --accent-red: rgba(255, 46, 46, 0.88);
+    --accent-red-strong: #ff1f1f;
+
+    --text-main: #f4f2fa;
+    --text-on-red: #ffffff;
+
+    --glow-soft: 0 0 18px rgba(155, 92, 255, 0.35);
+    --glow-strong: 0 0 32px rgba(155, 92, 255, 0.65);
+
+    --radius-lg: 18px;
+
+    --transition-fast: 0.25s ease;
+    --transition-smooth: 0.45s ease;
+}
+
+/* =====================================================
+   BASE
+   ===================================================== */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Sora', system-ui, sans-serif;
+    background: linear-gradient(160deg, var(--bg-base-1), var(--bg-base-2));
+    color: var(--text-main);
+    min-height: 100vh;
+}
+
+/* =====================================================
+   NAVBAR
+   ===================================================== */
+
+.navbar-app {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    background: linear-gradient(135deg, var(--nav-purple-1), var(--nav-purple-2));
+
+    margin: 0.8rem;
+    padding: 0.9rem 0;
+
+    border-radius: var(--radius-lg);
+    box-shadow: var(--glow-soft);
+    overflow: hidden;
+}
+
+/* =====================================================
+   BORDE LUMINOSO ÚNICO (RECORRE TODO)
+   ===================================================== */
+
+.navbar-app::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 2px;
+    border-radius: inherit;
+
+    background: conic-gradient(
+        from 0deg,
+        transparent 0%,
+        var(--accent-purple) 20%,
+        transparent 40%,
+        transparent 60%,
+        var(--accent-purple) 80%,
+        transparent 100%
+    );
+
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+
+    filter: drop-shadow(0 0 12px var(--accent-purple));
+    animation: border-spin 6s linear infinite;
+}
+
+@keyframes border-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* =====================================================
+   CONTENIDO INTERNO
+   ===================================================== */
+
+.navbar-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* =====================================================
+   LOGO + TÍTULO
+   ===================================================== */
+
+.navbar-title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+}
+
+.navbar-logo {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    border: 3px solid var(--accent-purple);
+    box-shadow: var(--glow-strong);
+    animation: logo-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes logo-pulse {
+    0%,100% { transform: scale(1); box-shadow: var(--glow-soft); }
+    50%     { transform: scale(1.06); box-shadow: var(--glow-strong); }
+}
+
+.navbar-title-text {
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: var(--text-main);
+    letter-spacing: 0.6px;
+    transition: var(--transition-smooth);
+}
+
+.navbar-title:hover .navbar-title-text {
+    transform: rotate(360deg);
+    color: var(--accent-purple);
+    text-shadow: 0 0 14px var(--accent-purple);
+}
+
+/* =====================================================
+   BOTÓN AGREGAR CONTACTO (FIX DEFINITIVO)
+   ===================================================== */
+
+.btn-add-contact {
+    position: relative;
+    overflow: hidden;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    padding: 0.75rem 1.5rem;
+    border-radius: 14px;
+
+    background: linear-gradient(135deg, #7a3cff, #b88cff);
+    color: #ffffff;
+
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+
+    box-shadow: 0 0 18px rgba(155, 92, 255, 0.6);
+    transition: var(--transition-smooth);
+}
+
+/* CAPA ROJA (DEBAJO) */
+.btn-add-contact::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, var(--accent-red), var(--accent-red-strong));
+    transform: translateY(100%);
+    transition: var(--transition-smooth);
+    z-index: 0;
+}
+
+/* TEXTO E ICONO SIEMPRE ARRIBA */
+.btn-add-contact i,
+.btn-add-contact .btn-text {
+    position: relative;
+    z-index: 1;
+}
+
+/* CONTRASTE FUERTE AL RELLENARSE */
+.btn-add-contact:hover {
+    color: var(--text-on-red);
+    text-shadow: 0 2px 6px rgba(0,0,0,0.45); /* 🔴 CLAVE */
+    box-shadow: 0 0 40px rgba(255, 46, 46, 0.9);
+    transform: translateY(-3px);
+}
+
+.btn-add-contact:hover::before {
+    transform: translateY(0);
+}
+
+/* =====================================================
+   RESPONSIVE REAL (SOLO ICONO)
+   ===================================================== */
+
+@media (max-width: 576px) {
+
+    .navbar-logo {
+        width: 54px;
+        height: 54px;
+    }
+
+    .navbar-title-text {
+        font-size: 1.35rem;
+    }
+
+    .btn-add-contact {
+        padding: 0.7rem;
+    }
+
+    .btn-add-contact .btn-text {
+        display: none; /* 🔴 AHORA SÍ FUNCIONA */
+    }
+}
+
+/* =========================
+   HOME – WRAPPER
+========================= */
+
+.home-wrapper {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1rem;
+    background: radial-gradient(
+        circle at top,
+        #1a082d 0%,
+        #0e0418 45%,
+        #07030c 100%
+    );
+}
+
+/* =========================
+   CARD PRINCIPAL (GLASS + NEON)
+========================= */
+
+.home-card {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 2.5rem;
+    align-items: center;
+    padding: 2.5rem;
+    border-radius: 28px;
+
+    background: rgba(255, 255, 255, 0.045);
+    backdrop-filter: blur(16px);
+
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.08),
+        0 30px 90px rgba(0, 0, 0, 0.65);
+
+    color: #fff;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+
+    transition: transform 0.4s ease;
+    isolation: isolate; /* clave para glow */
+    cursor: pointer; /* interacción clic/touch en cualquier parte */
+}
+
+/* =========================
+   NEON + GLOW
+========================= */
+
+.home-card::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(168, 85, 247, 0.45),
+        rgba(124, 58, 237, 0.55),
+        transparent
+    );
+    opacity: 0.35;
+    filter: blur(18px);
+    z-index: -1;
+    transition: opacity 0.4s ease;
+    animation: neonBreath 6s ease-in-out infinite;
+}
+
+.home-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    border: 1px solid rgba(168, 85, 247, 0.18);
+    pointer-events: none;
+}
+
+@keyframes neonBreath {
+    0%,100% { opacity: 0.35; }
+    50% { opacity: 0.5; }
+}
+
+/* =========================
+   HOVER / CLICK INTERACTIVO
+========================= */
+
+.home-card:hover,
+.home-card:focus-within,
+.home-card:active {
+    transform: translateY(-6px);
+}
+
+.home-card:hover::before,
+.home-card:focus-within::before,
+.home-card:active::before {
+    opacity: 0.7;
+}
+
+/* =========================
+   VISUAL (IMÁGENES) CON SALTO
+========================= */
+
+.home-visual {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    aspect-ratio: 1 / 1;
+}
+
+.home-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: all 0.5s ease;
+    filter: drop-shadow(0 0 18px rgba(180, 0, 255, 0.55));
+}
+
+.home-img--idle {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.home-img--active {
+    opacity: 0;
+    transform: translateY(20px) scale(0.92);
+}
+
+/* Activación al hover, focus o click en toda la card */
+.home-card:hover .home-img--idle,
+.home-card:focus-within .home-img--idle,
+.home-card:active .home-img--idle {
+    opacity: 0;
+    transform: translateY(18px) scale(0.9);
+}
+
+.home-card:hover .home-img--active,
+.home-card:focus-within .home-img--active,
+.home-card:active .home-img--active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* =========================
+   TEXTO
+========================= */
+
+.home-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.home-title {
+    font-size: clamp(2rem, 4vw, 2.6rem);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.home-subtitle {
+    color: rgba(255, 255, 255, 0.75);
+    margin-bottom: 1.2rem;
+}
+
+.home-summary {
+    margin-bottom: 2rem;
+}
+
+/* =========================
+   BOTONES CON ICONOS
+========================= */
+
+.home-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.home-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.65rem 1.4rem;
+    border-radius: 999px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.home-btn i {
+    font-size: 1.2rem;
+}
+
+/* Botón ver contactos */
+.home-btn--view {
+    background: linear-gradient(135deg, #7c3aed, #a855f7);
+    color: #fff;
+}
+
+/* Botón agregar contacto */
+.home-btn--add {
+    background: linear-gradient(135deg, #22c55e, #4ade80);
+    color: #052e1a;
+}
+
+.home-btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.15);
+}
+
+/* =========================
+   ESTADOS
+========================= */
+
+.home-loading { color: #c084fc; }
+.home-error { color: #ff4d6d; }
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+    .home-card {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .home-visual {
+        margin: 0 auto;
+    }
+    .home-actions {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .home-btn span {
+        display: none; /* solo icono en móvil */
+    }
+    .home-btn {
+        padding: 0.65rem;
+    }
+}

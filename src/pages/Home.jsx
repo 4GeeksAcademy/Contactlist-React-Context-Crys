@@ -1,52 +1,75 @@
 // pages/Home.jsx
 import { Link } from "react-router-dom";
 import useGlobalReducer from "../hooks/useGlobalReducer";
+import homeImg from "../assets/hoome.jpg";
+import homeImgActive from "../assets/hoome2.jpg";
 
 export const Home = () => {
     const { store } = useGlobalReducer();
     const { contacts, loading, error } = store;
 
     return (
-        <div className="home-container container mt-5 text-center">
+        <section className="home-wrapper">
+            <div className="home-card container">
 
-            <h1 className="home-title mb-3">Contact Manager</h1>
-            <p className="home-subtitle text-muted mb-4">
-                Gestiona tus contactos desde un solo lugar
-            </p>
+                {/* Imagen */}
+                <div className="home-visual" tabIndex="0">
+                    <img
+                        src={homeImg}
+                        alt="Personaje sentado"
+                        className="home-img home-img--idle"
+                    />
+                    <img
+                        src={homeImgActive}
+                        alt="Personaje de pie"
+                        className="home-img home-img--active"
+                    />
+                </div>
 
-            {/* Estados globales */}
-            {loading && (
-                <p className="home-loading text-primary">
-                    Cargando datos...
-                </p>
-            )}
+                {/* Texto */}
+                <div className="home-content">
+                    <h1 className="home-title">Contact Manager</h1>
 
-            {error && (
-                <p className="home-error text-danger">
-                    {error}
-                </p>
-            )}
-
-            {!loading && !error && (
-                <>
-                    <p className="home-summary mb-4">
-                        Actualmente tienes{" "}
-                        <strong>{contacts.length}</strong>{" "}
-                        contactos guardados.
+                    <p className="home-subtitle">
+                        Gestiona, crea y controla tus contactos sin fricción
                     </p>
 
-                    <div className="home-actions d-flex justify-content-center gap-3">
-                        <Link to="/contacts" className="btn btn-primary">
-                            Ver contactos
-                        </Link>
+                    {loading && (
+                        <p className="home-loading">Cargando datos…</p>
+                    )}
 
-                        <Link to="/contacts/add" className="btn btn-success">
-                            Agregar contacto
-                        </Link>
-                    </div>
-                </>
-            )}
+                    {error && (
+                        <p className="home-error">{error}</p>
+                    )}
 
-        </div>
+                    {!loading && !error && (
+                        <>
+                            <p className="home-summary">
+                                Tienes <strong>{contacts.length}</strong> contactos activos
+                            </p>
+
+                            <div className="home-actions">
+                                <Link
+                                    to="/contacts"
+                                    className="home-btn home-btn--view"
+                                >
+                                    <i className="bi bi-eye-fill"></i>
+                                    <span>Ver contactos</span>
+                                </Link>
+
+                                <Link
+                                    to="/contacts/add"
+                                    className="home-btn home-btn--add"
+                                >
+                                    <i className="bi bi-person-plus-fill"></i>
+                                    <span>Agregar contacto</span>
+                                </Link>
+                            </div>
+                        </>
+                    )}
+                </div>
+
+            </div>
+        </section>
     );
 };

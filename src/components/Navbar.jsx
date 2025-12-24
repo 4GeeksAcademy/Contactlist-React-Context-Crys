@@ -1,32 +1,30 @@
 import { Link } from "react-router-dom";
-import useGlobalReducer from "../hooks/useGlobalReducer"; // si luego manejamos modal o acciones
+import useGlobalReducer from "../hooks/useGlobalReducer";
 import logo from "../assets/logotipo.jpg";
 
 export const Navbar = () => {
-    const { dispatch } = useGlobalReducer(); // opcional si quieres usarlo para abrir modal
+    const { dispatch } = useGlobalReducer();
 
     return (
-        <nav className="navbar navbar-light bg-light navbar-app shadow-sm">
-            <div className="container d-flex justify-content-between align-items-center">
+        <nav className="navbar navbar-app">
+            <div className="container navbar-inner">
 
-                {/* Título con logo */}
-                <Link
-                    to="/"
-                    className="navbar-title d-flex align-items-center text-decoration-none"
-                >
+                {/* Logo + nombre */}
+                <Link to="/" className="navbar-title">
                     <img
                         src={logo}
-                        alt="ContactMaster logo"
-                        className="me-2 navbar-logo"
+                        alt="Contact logo"
+                        className="navbar-logo"
                     />
-                    <span className="h4 mb-0">ContactMaster</span>
+                    <span className="navbar-title-text">Contact Manager</span>
                 </Link>
-                {/* Botón agregar contacto */}
+
+                {/* Acción */}
                 <div className="navbar-actions">
-                    <Link to="/contacts/add">  {/* más adelante será ruta de formulario */}
-                        <button className="btn btn-success btn-add-contact">
-                            <i className="bi bi-person-plus-fill me-1"></i>
-                            Agregar contacto
+                    <Link to="/contacts/add">
+                        <button className="btn-add-contact">
+                            <i className="bi bi-person-plus-fill"></i>
+                            <span className="btn-text">Agregar contacto</span>
                         </button>
                     </Link>
                 </div>
