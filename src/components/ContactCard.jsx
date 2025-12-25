@@ -1,3 +1,4 @@
+// src/components/ContactCard.jsx
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { Modal, Button } from "react-bootstrap";
@@ -5,17 +6,18 @@ import { useNavigate } from "react-router-dom";
 import useGlobalReducer from "../hooks/useGlobalReducer";
 import { deleteContact } from "../service/contacts";
 
-// Import de imágenes
+/* Imágenes */
 import defaultImg from "../assets/default.jpg";
 import vegetaImg from "../assets/vegeta.png";
 import homeroImg from "../assets/homero.png";
+import modalImg from "../assets/modal.jpg";
 
 export const ContactCard = ({ contact }) => {
     const { dispatch } = useGlobalReducer();
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
 
-    // --- Eliminar contacto ---
+    /* ---------- Eliminar contacto ---------- */
     const handleDelete = async () => {
         try {
             await deleteContact(contact.id);
@@ -27,7 +29,7 @@ export const ContactCard = ({ contact }) => {
         }
     };
 
-    // --- Resolver imagen ---
+    /* ---------- Resolver imagen ---------- */
     const resolveImage = (contact) => {
         if (!contact || !contact.name) return defaultImg;
         const name = contact.name.toLowerCase();
@@ -38,7 +40,7 @@ export const ContactCard = ({ contact }) => {
 
     return (
         <>
-            {/* CONTACT CARD */}
+            {/* ================= CONTACT CARD ================= */}
             <div className="contact-card card d-flex flex-row p-3 mb-3 align-items-center">
                 <div className="contact-img me-3">
                     <img
@@ -88,33 +90,44 @@ export const ContactCard = ({ contact }) => {
                 </div>
             </div>
 
-            {/* MODAL ELIMINAR */}
+            {/* ================= MODAL ELIMINAR ================= */}
             <Modal
                 show={showModal}
                 onHide={() => setShowModal(false)}
                 centered
-                dialogClassName="delete-modal"
-                contentClassName="delete-modal-content"
             >
                 <Modal.Header closeButton>
                     <Modal.Title>Confirmar eliminación</Modal.Title>
                 </Modal.Header>
 
-                <Modal.Body>
-                    ¿Está seguro que desea eliminar el contacto{" "}
-                    <strong>{contact.name}</strong>?
+                <Modal.Body className="modal-delete-layout">
+                    {/* Imagen izquierda */}
+                    <img
+                        src={modalImg}
+                        alt="Eliminar contacto"
+                        className="modal-visual"
+                    />
+
+                    {/* Texto derecha */}
+                    <div className="modal-body-text">
+                        <p>
+                            ¿Seguro que deseas eliminar el contacto{" "}
+                            <strong>{contact.name}</strong>?
+                        </p>
+                        <p>Esta acción no se puede deshacer.</p>
+                    </div>
                 </Modal.Body>
 
                 <Modal.Footer>
                     <Button
-                        className="modal-btn-cancel"
+                        className="btn btn-secondary"
                         onClick={() => setShowModal(false)}
                     >
                         Cancelar
                     </Button>
 
                     <Button
-                        className="modal-btn-confirm"
+                        className="btn btn-danger"
                         onClick={handleDelete}
                     >
                         Eliminar
@@ -135,4 +148,3 @@ ContactCard.propTypes = {
         image: PropTypes.string
     }).isRequired
 };
-

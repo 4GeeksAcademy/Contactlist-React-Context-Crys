@@ -92,7 +92,9 @@ export const AddContact = () => {
           />
         </div>
         <div className="add-contact-actions d-flex gap-2">
-          <button type="submit" className="btn btn-primary">Guardar contacto</button>
+          <button className="btn btn-primary btn-fill btn-purple">
+            <span>Guardar Contacto</span>
+          </button>
           <button type="button" className="btn btn-secondary" onClick={() => navigate("/contacts")}>Cancelar</button>
         </div>
       </form>

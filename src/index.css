@@ -1036,3 +1036,311 @@ body {
     .modal-separator::after { display: none; } /* avoid overflow on small */
     .contact-card { border-radius: 14px; } /* slightly smaller radius on tiny screens */
 }
+
+/* ================================
+   FOOTER – GENERAL
+================================ */
+.footer {
+  background: linear-gradient(135deg, rgba(40,20,70,0.92), rgba(20,10,40,0.96));
+  color: #efe7ff;
+  padding: 1.8rem 1rem 2.2rem;
+  text-align: center;
+  position: relative;
+  font-family: 'Inter', sans-serif;
+  z-index: 2;
+}
+
+/* ================================
+   FOOTER LINE + DOT (PINGPONG)
+   CORRECCIÓN: ANIMACIÓN RECORRE TODA LA PANTALLA
+================================ */
+.footer-line {
+  position: relative;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, rgba(200,150,255,0.32), transparent);
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.footer-dot {
+  position: absolute;
+  top: 50%;
+  left: -14px; /* empieza ligeramente fuera del borde */
+  width: 14px;
+  height: 14px;
+  background: radial-gradient(circle, #fff 0%, #f6d6ff 35%, rgba(216,180,255,0.95) 70%);
+  border-radius: 50%;
+  transform: translateY(-50%);
+  animation: pingpong 5.5s linear infinite alternate;
+}
+
+@keyframes pingpong {
+  0%   { transform: translateX(0) translateY(-50%); }
+  50%  { transform: translateX(100vw) translateY(-50%); } /* recorre toda la pantalla */
+  100% { transform: translateX(0) translateY(-50%); }
+}
+
+/* ================================
+   LINKS + CODE + HEART
+================================ */
+.footer-links {
+  color: #efe7ff;
+  font-size: 1rem;
+}
+
+.footer-links a {
+  color: #c9a6ff;
+  text-decoration: none;
+  font-weight: 600;
+  margin: 0 4px;
+}
+
+.footer-links code {
+  background: rgba(180,120,255,0.18);
+  color: #f6e7ff;
+  padding: 0 5px;
+  border-radius: 4px;
+  font-family: 'Fira Code', monospace;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(180,120,255,0.25);
+}
+
+.footer-links .heart {
+  color: #ff6b88;
+  display: inline-block;
+  animation: heartbeat 1.2s infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  25%, 75% { transform: scale(1.2); }
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+@media (max-width: 480px) {
+  .footer {
+    padding: 1.4rem 0.8rem 1.8rem;
+  }
+
+  .footer-links {
+    font-size: 0.95rem;
+  }
+}
+
+
+/* =====================================================
+   SISTEMA UNIFICADO – BOTONES, HOME, INPUTS Y MODAL
+   PEGAR AL FINAL DEL CSS
+   ===================================================== */
+
+/* =======================
+   BOTONES – EFECTO NAVBAR
+   ======================= */
+
+.btn-fill {
+    position: relative;
+    overflow: hidden;
+    border-radius: 999px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    transition: transform 0.25s ease, box-shadow 0.35s ease;
+}
+
+.btn-fill::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateY(100%);
+    transition: transform 0.45s ease;
+    z-index: 0;
+}
+
+.btn-fill span,
+.btn-fill i {
+    position: relative;
+    z-index: 1;
+}
+
+.btn-fill:hover::before {
+    transform: translateY(0);
+}
+
+.btn-fill:hover {
+    transform: translateY(-3px);
+}
+
+/* Variante púrpura principal */
+.btn-purple {
+    background: linear-gradient(135deg, #7a3cff, #b88cff);
+    color: #ffffff;
+    box-shadow: 0 0 22px rgba(155, 92, 255, 0.55);
+}
+
+.btn-purple::before {
+    background: linear-gradient(180deg, #9b5cff, #6b21ff);
+}
+
+/* Variante secundaria (reemplaza verde fuerte) */
+.btn-soft {
+    background: linear-gradient(135deg, #6d5cff, #a78bfa);
+    color: #ffffff;
+    box-shadow: 0 0 18px rgba(155, 92, 255, 0.45);
+}
+
+.btn-soft::before {
+    background: linear-gradient(180deg, #8b5cf6, #6d28d9);
+}
+
+/* =======================
+   HOME – BOTONES
+   ======================= */
+
+.home-btn--view,
+.home-btn--add {
+    border-radius: 999px;
+    font-weight: 700;
+}
+
+.home-btn--view {
+    background: linear-gradient(135deg, #7a3cff, #b88cff);
+    color: #ffffff;
+}
+
+.home-btn--view::before {
+    background: linear-gradient(180deg, #9b5cff, #6b21ff);
+}
+
+.home-btn--add {
+    background: linear-gradient(135deg, #6d5cff, #a78bfa);
+    color: #ffffff;
+}
+
+.home-btn--add::before {
+    background: linear-gradient(180deg, #8b5cf6, #6d28d9);
+}
+
+/* =======================
+   INPUTS + LABELS
+   ======================= */
+
+.add-contact-form .form-label,
+.edit-contact-form .form-label {
+    width: 100%;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+.add-contact-form .add-contact-input,
+.edit-contact-form .edit-contact-input {
+    max-width: 700px;
+}
+
+/* =======================
+   ACCIONES – BOTONES
+   ======================= */
+
+.add-contact-actions,
+.edit-contact-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.6rem;
+}
+
+/* =======================
+   MODAL – IMAGEN IZQUIERDA
+   ======================= */
+
+.modal-delete-layout {
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+}
+
+.modal-visual {
+    width: 110px;
+    height: auto;
+    border-radius: 14px;
+    object-fit: cover;
+    box-shadow:
+        0 10px 30px rgba(120, 80, 200, 0.35),
+        0 0 25px rgba(155, 92, 255, 0.45);
+    transform: rotate(-2deg);
+    transition: transform 0.4s ease;
+}
+
+.modal-visual:hover {
+    transform: rotate(0deg) scale(1.04);
+}
+
+/* Responsive modal */
+@media (max-width: 480px) {
+    .modal-delete-layout {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .modal-visual {
+        width: 90px;
+    }
+}
+
+/* =====================================================
+   OVERRIDE FINAL – BOTONES GUARDAR / GUARDAR CAMBIOS
+   (Eliminar verde y unificar en púrpura navbar)
+   ===================================================== */
+
+/* Add Contact + Edit Contact – Guardar */
+.add-contact-actions .btn-primary,
+.edit-contact-actions .btn-primary,
+.add-contact-actions .btn-success,
+.edit-contact-actions .btn-success {
+    background: linear-gradient(135deg, #7a3cff, #b88cff) !important;
+    color: #ffffff !important;
+    border: none !important;
+    box-shadow: 0 0 22px rgba(155,92,255,0.55) !important;
+    font-weight: 700;
+    position: relative;
+    overflow: hidden;
+}
+
+/* efecto de relleno vertical (navbar style) */
+.add-contact-actions .btn-primary::before,
+.edit-contact-actions .btn-primary::before,
+.add-contact-actions .btn-success::before,
+.edit-contact-actions .btn-success::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, #9b5cff, #6b21ff);
+    transform: translateY(100%);
+    transition: transform 0.45s ease;
+    z-index: 0;
+}
+
+.add-contact-actions .btn-primary span,
+.edit-contact-actions .btn-primary span,
+.add-contact-actions .btn-success span,
+.edit-contact-actions .btn-success span {
+    position: relative;
+    z-index: 1;
+}
+
+.add-contact-actions .btn-primary:hover::before,
+.edit-contact-actions .btn-primary:hover::before,
+.add-contact-actions .btn-success:hover::before,
+.edit-contact-actions .btn-success:hover::before {
+    transform: translateY(0);
+}
+
+.add-contact-actions .btn-primary:hover,
+.edit-contact-actions .btn-primary:hover,
+.add-contact-actions .btn-success:hover,
+.edit-contact-actions .btn-success:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 40px rgba(155,92,255,0.85) !important;
+}

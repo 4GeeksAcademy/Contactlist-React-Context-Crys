@@ -25,19 +25,20 @@ export const EditContact = () => {
 
   useEffect(() => {
     const contact = contacts.find(c => String(c.id) === String(theId));
-
     if (contact) {
       setFormData(contact);
       setLoading(false);
     } else {
-      getContacts().then(allContacts => {
-        const c = allContacts.find(c => String(c.id) === String(theId));
-        if (c) setFormData(c);
-        setLoading(false);
-      }).catch(err => {
-        dispatch({ type: "SET_ERROR", payload: err.message });
-        setLoading(false);
-      });
+      getContacts()
+        .then(allContacts => {
+          const c = allContacts.find(c => String(c.id) === String(theId));
+          if (c) setFormData(c);
+          setLoading(false);
+        })
+        .catch(err => {
+          dispatch({ type: "SET_ERROR", payload: err.message });
+          setLoading(false);
+        });
     }
   }, [theId, contacts, dispatch]);
 
@@ -65,27 +66,57 @@ export const EditContact = () => {
   if (loading) return <p className="edit-contact-loading text-center mt-5">Cargando contacto...</p>;
 
   return (
-    <div className="edit-contact-container container mt-5">
-      <h1 className="edit-contact-title mb-4">Editar contacto</h1>
-      <form className="edit-contact-form" onSubmit={handleSubmit}>
+    <div className="add-contact-container container mt-5">
+      <h1 className="add-contact-title mb-4">Editar contacto</h1>
+      <form className="add-contact-form" onSubmit={handleSubmit}>
         <div className="form-group mb-3">
           <label className="form-label">Nombre completo</label>
-          <input type="text" className="form-control edit-contact-input" name="name" value={formData.name} onChange={handleChange}/>
+          <input
+            type="text"
+            className="form-control add-contact-input"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            placeholder="Nombre del contacto"
+          />
         </div>
         <div className="form-group mb-3">
           <label className="form-label">Email</label>
-          <input type="email" className="form-control edit-contact-input" name="email" value={formData.email} onChange={handleChange}/>
+          <input
+            type="email"
+            className="form-control add-contact-input"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="correo@email.com"
+          />
         </div>
         <div className="form-group mb-3">
           <label className="form-label">Teléfono</label>
-          <input type="text" className="form-control edit-contact-input" name="phone" value={formData.phone} onChange={handleChange}/>
+          <input
+            type="text"
+            className="form-control add-contact-input"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            placeholder="+34 600 000 000"
+          />
         </div>
         <div className="form-group mb-4">
           <label className="form-label">Dirección</label>
-          <input type="text" className="form-control edit-contact-input" name="address" value={formData.address} onChange={handleChange}/>
+          <input
+            type="text"
+            className="form-control add-contact-input"
+            name="address"
+            value={formData.address}
+            onChange={handleChange}
+            placeholder="Dirección completa"
+          />
         </div>
-        <div className="edit-contact-actions d-flex gap-2">
-          <button type="submit" className="btn btn-primary">Guardar cambios</button>
+        <div className="add-contact-actions d-flex gap-2">
+          <button className="btn btn-primary btn-fill btn-purple">
+            <span>Guardar Cambios</span>
+          </button>
           <button type="button" className="btn btn-secondary" onClick={() => navigate("/contacts")}>Cancelar</button>
         </div>
       </form>
