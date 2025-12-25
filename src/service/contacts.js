@@ -2,9 +2,9 @@ const BASE_URL = "https://playground.4geeks.com/contact";
 const AGENDA = "crys_contact_manager";
 
 // Contactos iniciales por defecto
+// ✅ NOTA: NO asignamos IDs manuales, que el sistema los genere
 const DEFAULT_CONTACTS = [
   {
-    id: 1,
     name: "Vegeta IV, Príncipe de los Saiyajin",
     email: "vegeta.prince@capsulecorp.earth",
     phone: "+34 666 777 000",
@@ -12,7 +12,6 @@ const DEFAULT_CONTACTS = [
     image: "vegeta.png"
   },
   {
-    id: 2,
     name: "Homer Jay Simpson",
     email: "homer.simpson@springfieldmail.com",
     phone: "+34 600 222 222",
@@ -62,10 +61,13 @@ export const getContacts = async () => {
 // ----------------------------
 export const createContact = async (contact) => {
   try {
+    // Aseguramos que la imagen sea solo el nombre del archivo
+    const payload = { ...contact, image: contact.image || "default.jpg" };
+
     const response = await fetch(`${BASE_URL}/agendas/${AGENDA}/contacts`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(contact)
+      body: JSON.stringify(payload)
     });
     if (!response.ok) throw new Error("Error al crear contacto");
 
@@ -85,7 +87,9 @@ export const createContact = async (contact) => {
 export const updateContact = async (id, contact) => {
   try {
     const current = JSON.parse(localStorage.getItem("contacts")) || [];
-    const updated = current.map(c => (String(c.id) === String(id) ? { ...c, ...contact } : c));
+    const updated = current.map(c =>
+      String(c.id) === String(id) ? { ...c, ...contact } : c
+    );
     localStorage.setItem("contacts", JSON.stringify(updated));
 
     // Intentamos API, pero fallo no bloquea

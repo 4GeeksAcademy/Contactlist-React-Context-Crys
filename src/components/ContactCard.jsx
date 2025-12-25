@@ -15,7 +15,7 @@ export const ContactCard = ({ contact }) => {
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
 
-    // --- Función de eliminación ---
+    // --- Eliminar contacto ---
     const handleDelete = async () => {
         try {
             await deleteContact(contact.id);
@@ -38,7 +38,8 @@ export const ContactCard = ({ contact }) => {
 
     return (
         <>
-            <div className="contact-card card d-flex flex-row p-3 mb-3 shadow-sm align-items-center">
+            {/* CONTACT CARD */}
+            <div className="contact-card card d-flex flex-row p-3 mb-3 align-items-center">
                 <div className="contact-img me-3">
                     <img
                         src={resolveImage(contact)}
@@ -51,14 +52,17 @@ export const ContactCard = ({ contact }) => {
 
                 <div className="contact-info flex-grow-1">
                     <h5 className="contact-name mb-2">{contact.name}</h5>
+
                     <p className="mb-1 contact-location">
                         <i className="bi bi-geo-alt-fill me-2"></i>
                         {contact.address || "No especificada"}
                     </p>
+
                     <p className="mb-1 contact-phone">
                         <i className="bi bi-telephone-fill me-2"></i>
                         {contact.phone || "No disponible"}
                     </p>
+
                     <p className="mb-0 contact-email">
                         <i className="bi bi-envelope-fill me-2"></i>
                         {contact.email || "No disponible"}
@@ -73,6 +77,7 @@ export const ContactCard = ({ contact }) => {
                     >
                         <i className="bi bi-pencil-fill"></i>
                     </button>
+
                     <button
                         className="btn btn-sm btn-danger"
                         title="Eliminar"
@@ -83,16 +88,37 @@ export const ContactCard = ({ contact }) => {
                 </div>
             </div>
 
-            <Modal show={showModal} onHide={() => setShowModal(false)} centered>
+            {/* MODAL ELIMINAR */}
+            <Modal
+                show={showModal}
+                onHide={() => setShowModal(false)}
+                centered
+                dialogClassName="delete-modal"
+                contentClassName="delete-modal-content"
+            >
                 <Modal.Header closeButton>
                     <Modal.Title>Confirmar eliminación</Modal.Title>
                 </Modal.Header>
+
                 <Modal.Body>
-                    ¿Está seguro que desea eliminar el contacto <strong>{contact.name}</strong>?
+                    ¿Está seguro que desea eliminar el contacto{" "}
+                    <strong>{contact.name}</strong>?
                 </Modal.Body>
+
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setShowModal(false)}>Cancelar</Button>
-                    <Button variant="danger" onClick={handleDelete}>Eliminar</Button>
+                    <Button
+                        className="modal-btn-cancel"
+                        onClick={() => setShowModal(false)}
+                    >
+                        Cancelar
+                    </Button>
+
+                    <Button
+                        className="modal-btn-confirm"
+                        onClick={handleDelete}
+                    >
+                        Eliminar
+                    </Button>
                 </Modal.Footer>
             </Modal>
         </>
@@ -109,3 +135,4 @@ ContactCard.propTypes = {
         image: PropTypes.string
     }).isRequired
 };
+
