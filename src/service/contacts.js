@@ -11,13 +11,7 @@ const DEFAULT_CONTACTS = [
     address: "Tierra – normalmente en Capsule Corporation, Ciudad del Oeste",
     image: "vegeta.png"
   },
-  {
-    name: "Homer Jay Simpson",
-    email: "homer.simpson@springfieldmail.com",
-    phone: "+34 600 222 222",
-    address: "742 Evergreen Terrace, Springfield",
-    image: "homero.png"
-  }
+  
 ];
 
 // ----------------------------

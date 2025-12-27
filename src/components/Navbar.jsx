@@ -1,10 +1,8 @@
 import { Link } from "react-router-dom";
-import useGlobalReducer from "../hooks/useGlobalReducer";
 import logo from "../assets/logotipo.jpg";
 
 export const Navbar = () => {
-    const { dispatch } = useGlobalReducer();
-
+   
     return (
         <nav className="navbar navbar-app">
             <div className="container navbar-inner">
@@ -16,10 +14,10 @@ export const Navbar = () => {
                         alt="Contact logo"
                         className="navbar-logo"
                     />
-                    <span className="navbar-title-text">Contact Manager</span>
+                    <span className="navbar-title-text">ContactManager</span>
                 </Link>
 
-                {/* Acción */}
+                {/*boton pra agregar nuevo contacto */}
                 <div className="navbar-actions">
                     <Link to="/contacts/add">
                         <button className="btn-add-contact">

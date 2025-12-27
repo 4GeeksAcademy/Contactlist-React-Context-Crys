@@ -1,4 +1,4 @@
-// src/components/Footer.jsx
+
 export const Footer = () => (
   <footer className="footer">
     <div className="footer-line">
@@ -10,6 +10,8 @@ export const Footer = () => (
         href="https://github.com/crysc4rmon4-web"
         target="_blank"
         rel="noopener noreferrer"
+         /*IMPORTANTE seguridad y privacidad, verificarlo siempre con target="blank" 
+         evita pishing*/
       >
         GitHub
       </a>
