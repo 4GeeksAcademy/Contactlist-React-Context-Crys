@@ -1,17 +1,16 @@
-// src/pages/AddContact.jsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useGlobalReducer from "../hooks/useGlobalReducer";
 import { createContact } from "../service/contacts";
 
-// Imagen default importada
+// Imagen default importada para los usuarios nuevos
 import defaultImg from "../assets/default.jpg";
 
 export const AddContact = () => {
   const navigate = useNavigate();
   const { dispatch } = useGlobalReducer();
 
-  // Formulario controlado
+  // Formulario control de datos ingresados, image la por defecto
   const [formData, setFormData] = useState({
     name: "",
     email: "",

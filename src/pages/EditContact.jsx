@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import useGlobalReducer from "../hooks/useGlobalReducer";
 import { updateContact, getContacts } from "../service/contacts";
 
-// Imagen default importada
+
 import defaultImg from "../assets/default.jpg";
 
 export const EditContact = () => {

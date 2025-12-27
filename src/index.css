@@ -1,6 +1,4 @@
-/* =====================================================
-   VARIABLES DE DISEÑO
-   ===================================================== */
+/*    VARIABLES DE DISEÑO */
 
 :root {
     --bg-base-1: #0b0616;
@@ -28,9 +26,7 @@
     --transition-smooth: 0.45s ease;
 }
 
-/* =====================================================
-   BASE GLOBAL
-   ===================================================== */
+/*   BASE GLOBAL */
 
 *,
 *::before,
@@ -46,9 +42,7 @@ body {
     min-height: 100vh;
 }
 
-/* =====================================================
-   NAVBAR
-   ===================================================== */
+/*    NAVBAR*/
 
 .navbar-app {
     position: sticky;
@@ -85,7 +79,7 @@ body {
     mask-composite: exclude;
     filter: drop-shadow(0 0 12px var(--accent-purple));
     animation: border-spin 6s linear infinite;
-    pointer-events: none; /* decorativo, no interfiere */
+    pointer-events: none; 
 }
 
 @keyframes border-spin {
@@ -133,9 +127,7 @@ body {
     text-shadow: 0 0 14px var(--accent-purple);
 }
 
-/* =====================================================
-   BOTÓN AGREGAR CONTACTO (navbar)
-   ===================================================== */
+/*    BOTÓN AGREGAR CONTACTO (navbar)*/
 
 .btn-add-contact {
     position: relative;
@@ -181,9 +173,7 @@ body {
     transform: translateY(0);
 }
 
-/* =====================================================
-   NAVBAR RESPONSIVE
-   ===================================================== */
+/*    NAVBAR RESPONSIVE   */
 
 @media (max-width: 576px) {
     .navbar-logo { width: 54px; height: 54px; }
@@ -192,9 +182,7 @@ body {
     .btn-add-contact .btn-text { display: none; }
 }
 
-/* =====================================================
-   HOME – WRAPPER
-   ===================================================== */
+/*    HOME – WRAPPER */
 
 .home-wrapper {
     min-height: calc(100vh - 80px);
@@ -210,15 +198,13 @@ body {
     );
 }
 
-/* =====================================================
-   HOME – CARD PRINCIPAL (glass + neon)
-   ===================================================== */
+/*HOME – CARD PRINCIPAL (glass + neon) */
 
 .home-card {
     position: relative;
     display: grid;
-    grid-template-columns: 1fr 1.5fr; /* imagen | contenido */
-    gap: 0.5rem; /* espacio reducido, acercamos elementos */
+    grid-template-columns: 1fr 1.5fr; 
+    gap: 0.5rem; 
     align-items: center;
     padding: 2.5rem;
     border-radius: 28px;
@@ -262,19 +248,17 @@ body {
     50% { opacity: 0.6; }
 }
 
-/* =====================================================
-   HOME – VISUAL (IMÁGENES)
-   ===================================================== */
+/* HOME – VISUAL (IMÁGENES)*/
 
 .home-visual {
     position: relative;
     max-width: 300px;
     aspect-ratio: 1 / 1;
-    margin-left: 50px; /* Juega con este valor para mover la imagen a la derecha */
+    margin-left: 50px; 
 }
 
-/* Si quieres micro-ajuste horizontal fino: usa translateX */
-.home-visual.move-right { transform: translateX(20px); } /* alternativa JS/CSS util */
+
+.home-visual.move-right { transform: translateX(20px); } 
 
 .home-img {
     position: absolute;
@@ -284,7 +268,7 @@ body {
     object-fit: contain;
     transition: all 0.5s ease;
     filter: drop-shadow(0 0 18px rgba(180, 0, 255, 0.55));
-    /* No usar margin-left aquí — mover el contenedor (.home-visual) es más robusto */
+   
 }
 
 /* estados imagen */
@@ -294,9 +278,7 @@ body {
 .home-card:hover .home-img--idle { opacity: 0; transform: translateY(18px) scale(0.9); }
 .home-card:hover .home-img--active { opacity: 1; transform: translateY(0) scale(1); }
 
-/* =====================================================
-   HOME – TEXTO Y MENSAJES (summary / empty)
-   ===================================================== */
+/*   HOME – TEXTO Y MENSAJES (summary / empty) */
 
 .home-content { display: flex; flex-direction: column; gap: 0.8rem; }
 
@@ -318,23 +300,19 @@ body {
 .home-subtitle { color: rgba(255, 255, 255, 0.75); }
 
 /* ---------- Message: active / empty (IMPORTANT) ---------- */
-/* Use .home-summary for the "Tienes X contactos" message
-   and .home-empty for "No tienes contactos". Both must be
-   light gray to contrast with purple background. */
+
 
 .home-summary, .home-empty {
-    color: var(--text-muted); /* gris claro definido en :root */
+    color: var(--text-muted); 
     font-size: 1rem;
     margin-bottom: 1rem;
 }
 
-/* error / loading keep distinct colors */
+
 .home-loading { color: #c084fc; }
 .home-error { color: #ff6b81; }
 
-/* =====================================================
-   HOME – BOTONES (funcionales)
-   ===================================================== */
+/*   HOME – BOTONES (funcionales) */
 
 .home-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
 
@@ -363,9 +341,7 @@ body {
 
 .home-btn:hover { transform: translateY(-2px); filter: brightness(1.15); }
 
-/* =====================================================
-   HOME – RESPONSIVE
-   ===================================================== */
+/*   HOME – RESPONSIVE*/
 
 @media (max-width: 768px) {
     .home-card { grid-template-columns: 1fr; text-align: center; }
@@ -377,13 +353,9 @@ body {
     .home-btn { padding: 0.65rem; }
 }
 
-/* =====================================================
-   ADD CONTACT – CONTENEDOR GENERAL (UN SOLO BLOQUE)
-   ===================================================== */
+/*    ADD CONTACT – CONTENEDOR GENERAL (UN SOLO BLOQUE)   */
 
-/* NOTE: este bloque reemplaza cualquier duplicado anterior.
-   Es específico y con suficiente especificidad para sobreescribir
-   estilos de Bootstrap como .form-control y .btn sin romper lógica. */
+
 
 .add-contact-container {
     max-width: 620px;
@@ -418,9 +390,7 @@ body {
     animation: neonBreath 6s ease-in-out infinite;
 }
 
-/* =====================================================
-   ADD CONTACT – TÍTULO
-   ===================================================== */
+/* ADD CONTACT – TÍTULO*/
 
 .add-contact-title {
     font-size: clamp(2rem, 4vw, 2.6rem);
@@ -432,16 +402,14 @@ body {
     text-shadow: 0 0 8px rgba(168, 85, 247, 0.6);
 }
 
-/* =====================================================
-   ADD CONTACT – FORM (específico)
-   ===================================================== */
+/*ADD CONTACT – FORM (específico) */
 
 .add-contact-form {
     display: flex;
     flex-direction: column;
     gap: 0.9rem;
-    align-items: center;    /* centra los inputs contenido */
-    text-align: left;       /* labels alineados a la izquierda en pantallas grandes */
+    align-items: center;    
+    text-align: left;      
     width: 100%;
     padding: 0 0.4rem;
 }
@@ -455,18 +423,16 @@ body {
     max-width: 520px;
 }
 
-/* =========================
-   INPUTS (FORZAR SOBRE BOOTSTRAP)
-   ========================= */
+/* INPUTS forzados sobre bootstrap */
 
-/* selector más específico para sobreescribir .form-control */
+
 .add-contact-form input.form-control.add-contact-input,
 .add-contact-form .add-contact-input {
     width: 100%;
-    max-width: 520px;               /* 👉 AUMENTÉ a 520px (más ancho, no full) */
-    margin: 0 0.5rem;               /* centra dentro del card */
-    background: rgba(99, 50, 153, 0.20); /* fondo morado claro, no blanco */
-    color: #e6ddff;                 /* texto suave claro que contraste con púrpura */
+    max-width: 520px;               
+    margin: 0 0.5rem;               
+    background: rgba(99, 50, 153, 0.20); 
+    color: #e6ddff;                 
     border: 1px solid rgba(168,85,247,0.28);
     border-radius: 12px;
     padding: 0.65rem 0.9rem;
@@ -492,7 +458,7 @@ body {
         0 0 12px rgba(155,92,255,0.28);
 }
 
-/* evita que Bootstrap force styles desde fuera (si aún hay conflicto) */
+/* evita que Bootstrap force styles desde fuera (chapuza para arreglar conflicto) */
 .add-contact-form input.form-control.add-contact-input,
 .add-contact-form .add-contact-input {
     -webkit-appearance: none;
@@ -500,15 +466,13 @@ body {
     appearance: none;
 }
 
-/* =====================================================
-   ADD CONTACT – ACCIONES (botones)
-   ===================================================== */
+/*  ADD CONTACT – ACCIONES (botones)*/
 
 .add-contact-actions {
     display: flex;
     justify-content: flex-end;
     gap: 1rem;
-    margin-top: 1rem; /* los subimos un poco */
+    margin-top: 1rem; 
     width: 100%;
     max-width: 520px;
     margin-left: auto;
@@ -549,9 +513,7 @@ body {
     background: rgba(255,255,255,0.12);
 }
 
-/* =====================================================
-   ADD CONTACT – RESPONSIVE
-   ===================================================== */
+/*ADD CONTACT – RESPONSIVE*/
 
 @media (max-width: 576px) {
     .add-contact-container { padding: 1.8rem 1.2rem; }
@@ -563,9 +525,7 @@ body {
     .add-contact-actions .btn, .add-contact-actions button { width: 100%; }
 }
 
-/* ================================
-   CONTACTS – CONTENEDOR GENERAL
-================================ */
+/* CONTACTS – CONTENEDOR GENERAL */
 
 .contacts-container {
     max-width: 900px;
@@ -587,9 +547,7 @@ body {
     opacity: 0.95;
 }
 
-/* ================================
-   CONTACT CARD – BASE
-================================ */
+/* CONTACT CARD – BASE */
 
 .contact-card {
     background: linear-gradient(
@@ -635,7 +593,7 @@ body {
     z-index: 0;
 }
 
-/* Sheen layer (destello tipo Apple / Stripe) */
+/* Sheen layer (destello) */
 .contact-card::after {
     content: "";
     position: absolute;
@@ -672,9 +630,7 @@ body {
     transform: translateX(120%); /* sheen atraviesa la tarjeta */
 }
 
-/* ================================
-   AVATAR / IMAGE – 3D ROTATION
-================================ */
+/*  AVATAR / IMAGE – 3D ROTATION */
 
 .contact-img { z-index: 2; }
 
@@ -710,9 +666,7 @@ body {
     }
 }
 
-/* ================================
-   CONTACT INFO
-================================ */
+/* CONTACT INFO */
 
 .contact-info { z-index: 2; }
 
@@ -731,7 +685,7 @@ body {
     margin: 0;
 }
 
-/* Ensure content sits above decoration */
+/* Decoracion */
 .contact-card .contact-img,
 .contact-card .contact-info,
 .contact-card .contact-actions {
@@ -739,9 +693,7 @@ body {
     z-index: 2;
 }
 
-/* ================================
-   ACTIONS
-================================ */
+/* ACTIONS */
 
 .contact-actions {
     display: flex;
@@ -783,11 +735,9 @@ body {
     box-shadow: 0 12px 40px rgba(255,80,110,0.38);
 }
 
-/* ================================
-   MODAL – CONFIRM DELETE (ENHANCED)
-================================ */
+/*  MODAL – seccion*/
 
-/* keep existing modal base for other modals */
+
 .modal-content {
     background: linear-gradient(
         135deg,
@@ -824,7 +774,7 @@ body {
     z-index: -1;
 }
 
-/* Smooth entry when modal shows */
+
 .modal.show .modal-content {
     animation: modalAlert 0.56s ease-out both;
 }
@@ -833,9 +783,7 @@ body {
     to   { transform: scale(1); opacity: 1; }
 }
 
-/* ================================
-   MODAL HEADER – Title imposing + glass close btn
-================================ */
+/* MODAL HEADER */
 
 .modal-header {
     padding-bottom: 0.6rem;
@@ -844,7 +792,7 @@ body {
     gap: 1rem;
 }
 
-/* Title: heavier, clearer, imposing */
+/* titulo*/
 .modal-title {
     color: #f6eaff;
     font-weight: 900;
@@ -858,7 +806,7 @@ body {
     z-index: 3;
 }
 
-/* Glass-style close button (styles for Bootstrap btn-close) */
+/* Glass-style  */
 .modal-header .btn-close {
     width: 38px;
     height: 38px;
@@ -875,7 +823,7 @@ body {
     transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
 }
 
-/* hide default svg cross background to style our own glyph */
+
 .modal-header .btn-close::before {
     content: "✕";
     font-size: 16px;
@@ -884,18 +832,15 @@ body {
     transform: translateY(-1px);
 }
 
-/* hover state for close (glass reaction) */
+
 .modal-header .btn-close:hover {
     transform: translateY(-3px) scale(1.03);
     background: rgba(255,255,255,0.09);
     box-shadow: 0 10px 28px rgba(120,80,200,0.18);
 }
 
-/* ================================
-   MODAL SEPARATORS (TOP + BOTTOM) with ping-pong dot
-================================ */
 
-/* base separator line */
+/* base linea separadora */
 .modal-separator {
     position: relative;
     height: 2px;
@@ -905,7 +850,7 @@ body {
     overflow: hidden;
 }
 
-/* luminous dot that ping-pongs left-right-left */
+
 .modal-separator::after {
     content: "";
     position: absolute;
@@ -920,16 +865,14 @@ body {
     animation: pingpong 2.6s ease-in-out infinite alternate;
 }
 
-/* ping-pong animation */
+
 @keyframes pingpong {
     0%   { transform: translate(0, -50%); }
     50%  { transform: translate(85%, -50%); }
     100% { transform: translate(0, -50%); }
 }
 
-/* ================================
-   MODAL BODY
-================================ */
+/*  MODAL BODY*/
 
 .modal-body {
     display: flex;
@@ -949,11 +892,9 @@ body {
 
 .modal-body-text { flex: 1; }
 
-/* ================================
-   MODAL FOOTER – BUTTONS (BRUTAL, CON SHINE)
-================================ */
+/*  MODAL FOOTER – BUTTONS */
 
-/* ensure modal buttons used in JSX are overridden by specific selectors */
+
 .delete-modal-content .modal-footer .modal-btn-cancel,
 .delete-modal-content .modal-footer .modal-btn-confirm {
     border-radius: 12px;
@@ -968,7 +909,7 @@ body {
     overflow: hidden;
 }
 
-/* Cancel — purple (specific override) */
+/* Cancel */
 .delete-modal-content .modal-footer .modal-btn-cancel {
     background: linear-gradient(135deg,#7a4cff,#9c6bff);
     color: #fff;
@@ -980,7 +921,7 @@ body {
     box-shadow: 0 18px 44px rgba(140,90,220,0.32);
 }
 
-/* Confirm (danger) — neon red with shine */
+/* Confirm  */
 .delete-modal-content .modal-footer .modal-btn-confirm {
     background: linear-gradient(135deg,#ff3b5c,#ff6a80);
     color: #fff;
@@ -1013,7 +954,7 @@ body {
     opacity: 0.95;
 }
 
-/* fallback generic selectors (if other modals use default .btn classes) */
+
 .modal-footer .btn-danger {
     background: linear-gradient(135deg,#ff556f,#ff2f5f);
     color: #fff;
@@ -1026,20 +967,16 @@ body {
     border: 1px solid rgba(200,150,255,0.12);
 }
 
-/* ================================
-   RESPONSIVE
-================================ */
+/* RESPONSIVE */
 
 @media (max-width: 480px) {
     .modal-body { flex-direction: column; text-align: center; }
     .modal-avatar { margin: 0 auto; }
-    .modal-separator::after { display: none; } /* avoid overflow on small */
-    .contact-card { border-radius: 14px; } /* slightly smaller radius on tiny screens */
+    .modal-separator::after { display: none; } 
+    .contact-card { border-radius: 14px; } 
 }
 
-/* ================================
-   FOOTER – GENERAL
-================================ */
+/* FOOTER – GENERAL */
 .footer {
   background: linear-gradient(135deg, rgba(40,20,70,0.92), rgba(20,10,40,0.96));
   color: #efe7ff;
@@ -1050,10 +987,7 @@ body {
   z-index: 2;
 }
 
-/* ================================
-   FOOTER LINE + DOT (PINGPONG)
-   CORRECCIÓN: ANIMACIÓN RECORRE TODA LA PANTALLA
-================================ */
+/* decorado pingpn en la linea */
 .footer-line {
   position: relative;
   height: 3px;
@@ -1065,7 +999,7 @@ body {
 .footer-dot {
   position: absolute;
   top: 50%;
-  left: -14px; /* empieza ligeramente fuera del borde */
+  left: -14px; 
   width: 14px;
   height: 14px;
   background: radial-gradient(circle, #fff 0%, #f6d6ff 35%, rgba(216,180,255,0.95) 70%);
@@ -1080,9 +1014,7 @@ body {
   100% { transform: translateX(0) translateY(-50%); }
 }
 
-/* ================================
-   LINKS + CODE + HEART
-================================ */
+/*   LINKS + CODE + HEART */
 .footer-links {
   color: #efe7ff;
   font-size: 1rem;
@@ -1116,9 +1048,7 @@ body {
   25%, 75% { transform: scale(1.2); }
 }
 
-/* ================================
-   RESPONSIVE
-================================ */
+/* RESPONSIVE */
 @media (max-width: 480px) {
   .footer {
     padding: 1.4rem 0.8rem 1.8rem;
@@ -1130,14 +1060,8 @@ body {
 }
 
 
-/* =====================================================
-   SISTEMA UNIFICADO – BOTONES, HOME, INPUTS Y MODAL
-   PEGAR AL FINAL DEL CSS
-   ===================================================== */
 
-/* =======================
-   BOTONES – EFECTO NAVBAR
-   ======================= */
+/*Sobreescritura para algunos botones, */
 
 .btn-fill {
     position: relative;
@@ -1171,7 +1095,7 @@ body {
     transform: translateY(-3px);
 }
 
-/* Variante púrpura principal */
+
 .btn-purple {
     background: linear-gradient(135deg, #7a3cff, #b88cff);
     color: #ffffff;
@@ -1182,7 +1106,7 @@ body {
     background: linear-gradient(180deg, #9b5cff, #6b21ff);
 }
 
-/* Variante secundaria (reemplaza verde fuerte) */
+
 .btn-soft {
     background: linear-gradient(135deg, #6d5cff, #a78bfa);
     color: #ffffff;
@@ -1193,9 +1117,7 @@ body {
     background: linear-gradient(180deg, #8b5cf6, #6d28d9);
 }
 
-/* =======================
-   HOME – BOTONES
-   ======================= */
+/*    HOME – BOTONES   */
 
 .home-btn--view,
 .home-btn--add {
@@ -1221,9 +1143,7 @@ body {
     background: linear-gradient(180deg, #8b5cf6, #6d28d9);
 }
 
-/* =======================
-   INPUTS + LABELS
-   ======================= */
+/*    forzado para los INPUTS + LABELS   */
 
 .add-contact-form .form-label,
 .edit-contact-form .form-label {
@@ -1239,9 +1159,7 @@ body {
     max-width: 700px;
 }
 
-/* =======================
-   ACCIONES – BOTONES
-   ======================= */
+/* ACCIONES – BOTONES */
 
 .add-contact-actions,
 .edit-contact-actions {
@@ -1251,9 +1169,7 @@ body {
     margin-top: 1.6rem;
 }
 
-/* =======================
-   MODAL – IMAGEN IZQUIERDA
-   ======================= */
+/* MODAL – IMAGEN IZQUIERDA */
 
 .modal-delete-layout {
     display: flex;
@@ -1289,12 +1205,10 @@ body {
     }
 }
 
-/* =====================================================
-   OVERRIDE FINAL – BOTONES GUARDAR / GUARDAR CAMBIOS
-   (Eliminar verde y unificar en púrpura navbar)
-   ===================================================== */
+/* OVERRIDE FINAL – BOTONES GUARDAR / GUARDAR CAMBIOS
+   (Eliminar verde y unificar en púrpura navbar)*/
 
-/* Add Contact + Edit Contact – Guardar */
+
 .add-contact-actions .btn-primary,
 .edit-contact-actions .btn-primary,
 .add-contact-actions .btn-success,

@@ -1,4 +1,3 @@
-// pages/Home.jsx
 import { Link } from "react-router-dom";
 import useGlobalReducer from "../hooks/useGlobalReducer";
 import homeImg from "../assets/hoome.jpg";
@@ -12,37 +11,33 @@ export const Home = () => {
         <section className="home-wrapper">
             <div className="home-card container">
 
-                {/* Imagen decorativa (no bloquea clicks) */}
+                {/* Imagen decorativa animada con css  */}
                 <div className="home-visual">
                     <img
                         src={homeImg}
-                        alt="Personaje sentado"
+                        alt="Animación: personaje sentado, se pone de pie cuando lo tocas"
                         className="home-img home-img--idle"
                     />
                     <img
                         src={homeImgActive}
-                        alt="Personaje de pie"
+                        alt="Animación: personaje sentado, se pone de pie cuando lo tocas"
                         className="home-img home-img--active"
                     />
                 </div>
 
                 {/* Contenido funcional */}
                 <div className="home-content">
-                    <h1 className="home-title">Contact Manager</h1>
+                    <h1 className="home-title">ContactManager</h1>
 
                     <p className="home-subtitle">
-                        Gestiona, crea y controla tus contactos sin fricción
+                        Gestiona, crea y controla tus contactos sin problema.
                     </p>
 
-                    {loading && (
+                    {loading ? (
                         <p className="home-loading">Cargando datos…</p>
-                    )}
-
-                    {error && (
+                    ) : error ? (
                         <p className="home-error">{error}</p>
-                    )}
-
-                    {!loading && !error && (
+                    ) : (
                         <>
                             <p className="home-summary">
                                 Tienes <strong>{contacts.length}</strong> contactos activos
