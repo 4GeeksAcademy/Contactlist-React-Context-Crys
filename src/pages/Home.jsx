@@ -27,7 +27,11 @@ export const Home = () => {
 
                 {/* Contenido funcional */}
                 <div className="home-content">
-                    <h1 className="home-title">ContactManager</h1>
+                    <h1 className="home-title">
+                        <span className="home-title--full">Contact Manager</span>
+                        <span className="home-title--short">CM</span>
+                    </h1>
+
 
                     <p className="home-subtitle">
                         Gestiona, crea y controla tus contactos sin problema.

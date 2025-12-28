@@ -1258,3 +1258,89 @@ body {
     transform: translateY(-3px);
     box-shadow: 0 0 40px rgba(155,92,255,0.85) !important;
 }
+
+/* =========================
+   RESPONSIVE FIX — MOBILE
+   ========================= */
+
+/* Por defecto (desktop y tablet) */
+.navbar-title--short,
+.home-title--short {
+  display: none;
+}
+
+/* Mobile S y M */
+@media (max-width: 576px) {
+
+  /* Navbar */
+  .navbar-title--full {
+    display: none;
+  }
+
+  .navbar-title--short {
+    display: inline-block;
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* Home */
+  .home-title--full {
+    display: none;
+  }
+
+  .home-title--short {
+    display: block;
+    font-size: 2rem;
+    font-weight: 800;
+    text-align: center;
+  }
+
+  /* Ajustes extra que ayudan */
+  .home-subtitle {
+    font-size: 0.95rem;
+    text-align: center;
+  }
+
+  .home-actions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}
+
+/* =========================
+   HOME BUTTONS — RESPONSIVE FIX
+   ========================= */
+
+/* MOBILE S + M → solo icono, tamaño compacto */
+@media (max-width: 576px) {
+
+  .home-actions {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .home-btn {
+    width: auto !important;
+    padding: 0.65rem 0.8rem;
+    min-width: auto;
+    justify-content: center;
+  }
+
+  .home-btn span {
+    display: none;
+  }
+}
+
+/* TABLET + DESKTOP → comportamiento normal */
+@media (min-width: 577px) {
+
+  .home-btn {
+    width: auto;
+    padding: 0.65rem 1.4rem;
+  }
+
+  .home-btn span {
+    display: inline;
+  }
+}

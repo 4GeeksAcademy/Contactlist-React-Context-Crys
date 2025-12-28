@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import logo from "../assets/logotipo.jpg";
 
 export const Navbar = () => {
-   
+
     return (
         <nav className="navbar navbar-app">
             <div className="container navbar-inner">
@@ -14,7 +14,12 @@ export const Navbar = () => {
                         alt="Contact logo"
                         className="navbar-logo"
                     />
-                    <span className="navbar-title-text">ContactManager</span>
+                    <span className="navbar-title-text navbar-title--full">
+                        Contact Manager
+                    </span>
+                    <span className="navbar-title-text navbar-title--short">
+                        CM
+                    </span>
                 </Link>
 
                 {/*boton pra agregar nuevo contacto */}
